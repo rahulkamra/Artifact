@@ -1,0 +1,12 @@
+1. Username is unique
+2. When player is at level one he get spy lvl by default
+3. Every Body is evrybody's friends
+4. One user can start only one party with one with artifact
+5. Player must have more than 3 friends to generate the spy questions
+6. Player should have all the profile fields filled and should be unique from other players
+7. There is only one artifact of its kind means if one player get that artifact ,other players cannot get that artifact
+8. All the artifacts and description are taken from a map of Warcraft 3 called DOTA
+9. Price of an artifact is decided only when a player sell that artifact
+10.When a player is logged in another player can also log in with the same id , right now check is not there
+11.When a player buys information ,no gold exchange takes place , gold amount is acting as a threshhold to gain the prgress.
+12.when a player share information, no exp  exchange take place , the person who is sharing will get the exp based on the sharelvl
