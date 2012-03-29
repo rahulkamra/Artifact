@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="25" xmlns:components="com.artifact.components.*"  >
+	<mx:Canvas width="100%" height="100%">
+		<mx:LinkButton  maxWidth="{this.width *60/100}" alpha="0" label="- {_data.artifact.name} (Lvl {_data.artifactLvl}) " fontSize="12" paddingTop="5" click="handleClick(event)" enabled="{_data.artifact.isActive}"/>
+		<components:CustomProgressBar width="30%" height="100%" id="cmpProgressBar" x="{65*this.width/100}" percentComplete="{_data.progress}" />
+	</mx:Canvas>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.controller.ArtifactUIController;
+			import com.artifact.servermodel.CurrentSearchParty;
+			import com.artifact.controller.MockController;
+			import mx.core.Application;
+			import mx.managers.PopUpManager;
+			[Bindable]	
+			private var _data:CurrentSearchParty;
+			override public function set data(value:Object):void{
+				this._data=value as CurrentSearchParty;
+				
+			}
+			
+			public function handleClick(event:MouseEvent):void{
+				var popUp:Search=PopUpManager.createPopUp(Application.application as DisplayObject,Search,true) as Search;
+				popUp.initialize();
+				ArtifactUIController.currentSearch=popUp;
+				popUp.data=_data;
+				PopUpManager.centerPopUp(popUp);
+			}
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" styleName="loginApp" xmlns:components="com.artifact.components.*" creationComplete="creationComplete()">
+	<mx:states>
+		<mx:State name="loggedin">
+			<mx:RemoveChild target="{textinput1}"/>
+			<mx:RemoveChild target="{button1}"/>
+			<mx:RemoveChild target="{text1}"/>
+			<mx:SetProperty name="styleName" value="loggedInApp"/>
+			<mx:AddChild position="lastChild">
+				<mx:Canvas y="{topPadding}" width="90%" height="85%" horizontalCenter="0"  id="cvsMain">
+					<components:Home  y="{imgBanner.height}" width="100%" height="{cvsMain.height-imgBanner.height}" id="home">
+					</components:Home>
+					<mx:Image x="75" width="532" height="71" id="imgBanner" y="0" source="com/artifact/resources/images/banner.png"/>
+				</mx:Canvas>
+			</mx:AddChild>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.constants.ArtifactServiceConstants;
+			import com.artifact.constants.ArtifactConstants;
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.http.mxml.HTTPService;
+			import com.artifact.controller.ArtifactServiceController;
+			import com.artifact.controller.ArtifactUIController;
+			public const topPadding:int=50;
+			
+			public const bottomPadding:int=50;
+			
+			public static var artifactUIController:ArtifactUIController=new ArtifactUIController();
+			public static var artifactServiceController:ArtifactServiceController=new ArtifactServiceController();
+			public function login():void{
+				Artifact.artifactUIController.checkUsername(textinput1.text);
+				
+			}
+			
+			public function creationComplete():void{
+				var httpServ:HTTPService=new HTTPService;
+				httpServ.url="server.txt";
+				httpServ.method="get";
+				httpServ.send();
+				httpServ.addEventListener(ResultEvent.RESULT,function resultEvent(event:ResultEvent):void{
+					ArtifactServiceConstants.SERVER_URL=event.result as String
+				});
+				httpServ.addEventListener(FaultEvent.FAULT,function faultEvent(event:FaultEvent):void{
+					Alert.show('unable to load the settings');
+					Alert.show(event.fault.toString())
+					
+				});
+				
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Style source="com/artifact/resources/css/artifact.css"/>
+	<mx:TextInput y="237"  horizontalCenter="20" id="textinput1"/>
+	<mx:Button y="267" label="Login" horizontalCenter="-25" id="button1" click="login()"/>
+	<mx:Text y="234" text="Enter Adventurer&#xa;&#x9;&#x9;" height="32" color="#000000" fontFamily="Georgia" fontSize="16" horizontalCenter="-134" id="text1"/>
+</mx:Application>

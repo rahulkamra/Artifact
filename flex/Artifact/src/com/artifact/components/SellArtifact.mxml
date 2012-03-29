@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="230" height="144" styleName="loginApp">
+	<mx:Text x="42" y="24" text="Sell Artifact?" fontSize="19" fontWeight="bold"/>
+	<mx:Text x="47" y="61" text="Gold:" fontSize="17" fontWeight="bold"/>
+	<mx:Text x="102" y="61" fontSize="17" fontWeight="bold" text="{_gold}"/>
+	<mx:Button x="47" y="100" label="Yes" click="sellArtifact()"/>
+	<mx:Button x="128" y="100" label="No" click="closeMe()"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.artifact.servermodel.Inventory;
+			import mx.managers.PopUpManager;
+			[Bindable]
+			private var _data:Inventory;
+			[Bindable]
+			private var _gold:int;
+			//override public function set data(value:Object):void{
+				
+			//}
+			override public function set data(value:Object):void{
+				this._data=value as Inventory;
+				//now set the gold value
+				var artifactPrice:int=_data.artifactLvl*1000*Math.random();
+				_gold=artifactPrice;
+			}
+			
+			public function closeMe():void{
+				PopUpManager.removePopUp(this);
+			}
+			public function sellArtifact():void{
+				Artifact.artifactUIController.sellArtifact(_gold,_data);
+				closeMe();
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

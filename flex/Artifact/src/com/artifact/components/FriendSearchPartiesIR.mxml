@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:components="com.artifact.components.*" >
+	<mx:Canvas width="100%" height="100%">
+		<mx:Label  maxWidth="{this.width *60/100}" alpha="0" text="-{_data.user.username} - {_data.artifact.name} (Lvl {_data.artifactLvl}) " fontSize="12" paddingTop="5"/>
+		<components:CustomProgressBar width="30%" height="100%" id="cmpProgressBar" x="{65*this.width/100}" percentComplete="{_data.progress}" buttonMode="true"/>
+	</mx:Canvas>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.servermodel.CurrentSearchParty;
+			[Bindable]	
+			private var _data:CurrentSearchParty;
+			override public function set data(value:Object):void{
+				this._data=value as CurrentSearchParty;
+			}
+			
+			
+		]]>
+	</mx:Script>
+</mx:Canvas>

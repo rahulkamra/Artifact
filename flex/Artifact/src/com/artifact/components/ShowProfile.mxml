@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="400" height="418" styleName="loginApp">
+	<mx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			import com.artifact.servermodel.UserProfile;
+			[Bindable]
+			private var _data:UserProfile;
+			override public function set data(value:Object):void{
+				this._data=value as UserProfile;
+			}
+			public function closeMe():void{
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Label text="{_data.user.username}" fontWeight="bold" fontSize="18" x="20" y="10" fontStyle="italic"/>
+	
+	<mx:HBox x="10" y="65" height="28" id="hbxAge">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Age" height="100%" fontSize="13" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label text="{_data.age}"  height="100%" fontSize="13"/>
+	</mx:HBox>
+	
+	<mx:HBox height="28" x="10" y="101" id="hbxReligion">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Religion" height="100%" fontSize="13" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label height="100%" text="{_data.religion}" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="137" id="hbxLanguage">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Language" height="100%" fontSize="13" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label height="100%" text="{_data.language}" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="173" id="hbxHumour">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Humour" height="100%" fontSize="13" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label height="100%" text="{_data.humour}" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="209" id="hbxCountry">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Country" height="100%" fontSize="13" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label text="{_data.country}"  height="100%" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="245" id="hbxSchool">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="School" height="100%" fontSize="13" textAlign="left" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label text="{_data.school}"  height="100%" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="281" id="hbxJob">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Job" height="100%" fontSize="13" textAlign="left" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label text="{_data.job}"  height="100%" fontSize="13"/>
+	</mx:HBox>
+	<mx:HBox height="28" x="10" y="317" id="hbxFavGame">
+	<mx:Label text="-" height="100%" fontSize="13"/>
+	<mx:Label text="Favourite Game" height="100%" fontSize="13" textAlign="left" fontWeight="bold"/>
+	<mx:Label text=":" height="100%" fontSize="13"/>
+	<mx:Label text="{_data.favgame}"  height="100%" fontSize="13"/>
+	</mx:HBox>
+	<mx:Button label="Close" bottom="10" right="10" click="closeMe()"/>
+	<mx:Button styleName="close" right="20" top="20" click="closeMe()"/>
+	
+</mx:Canvas>

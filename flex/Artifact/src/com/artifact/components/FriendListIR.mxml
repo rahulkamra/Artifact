@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Image xmlns:mx="http://www.adobe.com/2006/mxml" source="{data.imgurl}" width="60" height="60" toolTip="{data.user.username}" doubleClickEnabled="true">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+		]]>
+	</mx:Script>
+	
+</mx:Image>

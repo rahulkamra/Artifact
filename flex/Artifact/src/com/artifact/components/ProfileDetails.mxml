@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"  width="404" height="168">
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.controller.ArtifactUIController;
+			override public function set data(value:Object):void{
+				
+			}
+		]]>
+	</mx:Script>
+	<mx:Label y="{this.height*10/100}" text="{ArtifactUIController.userProfile.user.username}"  horizontalCenter="0" fontSize="18" maxWidth="{this.width*80/100}"/>
+	
+	<mx:Label y="{this.height*35/100}" text="GOLD :" left="50" id="lblGoldPrefix" fontSize="13"/>
+	<mx:Label x="{lblGoldPrefix.x + lblGoldPrefix.width + 5}" y="{this.height*35/100}" text="{ArtifactUIController.gameProfile.gold}" fontSize="13" id="lblGold"/>
+	
+	<mx:Label  left="50" y="{this.height*50/100}" text="Level :" fontSize="13" id="lblLevelPrefix"/>
+	<mx:Label  y="{this.height*50/100}" text="{ArtifactUIController.gameProfile.globalLvl}" fontSize="13" id="lblLevel" x="{lblLevelPrefix.x + lblLevelPrefix.width + 5}"/>
+	
+	<mx:Button horizontalCenter="0" y="{this.height*65/100}" label="LEVEL UP" click="openAddSkillPopUp()"/>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.controller.MockController;
+			import mx.core.Application;
+			import com.artifact.components.AddSkill;
+
+			import mx.managers.PopUpManager;
+			
+			public function openAddSkillPopUp():void{
+				var popUp:AddSkill=PopUpManager.createPopUp(Application.application as DisplayObject,AddSkill,true) as AddSkill;
+				popUp.initialize();
+				popUp.data=MockController.giveDummySkillData();
+				PopUpManager.centerPopUp(popUp);
+				//PopUpManager.bringToFront(popUp);
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="700" height="400" styleName="loginApp">
+	<mx:Button y="356" label="Close" horizontalCenter="0" click="closeMe()"/>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.constants.ArtifactConstants;
+			import com.artifact.controller.ArtifactUIController;
+			import mx.managers.PopUpManager;
+			public function closeMe():void{
+				PopUpManager.removePopUp(this);
+			}
+			
+			
+		]]>
+	</mx:Script>
+	<mx:Label x="28" y="23" text="Level Up"  height="62" fontSize="28"/>
+	<mx:Label x="61" y="82" text="Current Level :" height="40" fontSize="16"/>
+	<mx:Label x="196" y="82" text="{ArtifactUIController.gameProfile.globalLvl}" height="40" fontSize="16" id="lblCurrentLvl"/>
+	<mx:Label x="335" y="82" text="Experience Points Available :" height="40" fontSize="16"/>
+	<mx:Label x="587" y="82" text="{ArtifactUIController.gameProfile.experiencePointsAvailable}" height="40" fontSize="16" id="lblExpPoints"/>
+	
+	<mx:Image x="61" y="143" source="@Embed(source='com/artifact/resources/images/SpyBox.png')"/>
+	<mx:Image x="426" y="143" source="@Embed(source='com/artifact/resources/images/buyBox.png')"/>
+	<mx:Image x="61" y="248" source="@Embed(source='com/artifact/resources/images/ScoutBox.png')"/>
+	<mx:Image x="426" y="248" source="@Embed(source='com/artifact/resources/images/ShareBox.png')"/>
+	
+	<mx:Label x="174" y="171" text="{ArtifactUIController.gameProfile.spyLvl}" fontSize="28" id="lblSpyLvl"/>
+	<mx:Label x="174" y="275" text="{ArtifactUIController.gameProfile.scoutLvl}" fontSize="28" id="lblScoutLvl"/>
+	<mx:Label x="530" y="171" text="{ArtifactUIController.gameProfile.buyLvl}" fontSize="28" id="lblBuyLvl"/>
+	<mx:Label x="530" y="275" text="{ArtifactUIController.gameProfile.shareLvl}" fontSize="28" id="lblShareLvl"/>
+	
+	<mx:Image x="246" y="144" height="101" styleName="loginApp" width="33" source="@Embed(source='com/artifact/resources/images/pl-bor.png')" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SPY)" buttonMode="true">
+		
+	</mx:Image>
+	<mx:Image x="246" y="248" height="101" styleName="loginApp" width="33" source="@Embed(source='com/artifact/resources/images/pl-bor.png')" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SCOUT)" buttonMode="true">
+		
+	</mx:Image>
+	<mx:Image x="610" y="142" height="101" styleName="loginApp" width="33" source="@Embed(source='com/artifact/resources/images/pl-bor.png')" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.BUY)" buttonMode="true">
+		
+	</mx:Image>
+	<mx:Image x="610" y="248" height="101" styleName="loginApp" width="33" source="@Embed(source='com/artifact/resources/images/pl-bor.png')" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SHARE)" buttonMode="true">
+		
+	</mx:Image>
+	<mx:LinkButton x="244" y="172" label="+" alpha="0" id="lblPlusSpy" fontSize="28" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SPY)"  fontWeight="normal"/>
+	<mx:LinkButton x="242" y="271" label="+" alpha="0" id="lblPlusScout" fontSize="28" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SCOUT)" fontWeight="normal"/>
+	<mx:LinkButton x="607" y="168" label="+" alpha="0" id="lblPlusBuy" fontSize="28" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.BUY)" fontWeight="normal"/>
+	<mx:LinkButton x="607" y="271" label="+" alpha="0" id="lblPlusShare" fontSize="28" visible="{ArtifactUIController.gameProfile.experiencePointsAvailable == 0?false:true}" click="addSkill(ArtifactConstants.SHARE)" fontWeight="normal"/>
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			public function addSkill(type:String):void{
+				Artifact.artifactUIController.addSkill(type);	
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

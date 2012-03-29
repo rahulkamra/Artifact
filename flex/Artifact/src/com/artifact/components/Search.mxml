@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="738" height="600"  xmlns:ns1="com.artifact.components.*"  styleName="search" backgroundSize="100%">
+	<mx:states>
+	<!--clear state-->
+		<mx:State name="clear">
+			<mx:RemoveChild target="{txiName}"/>
+			<mx:RemoveChild target="{txaDesc}"/>
+			<mx:RemoveChild target="{customprogressbar1}"/>
+			<mx:RemoveChild target="{image1}"/>
+			<mx:RemoveChild target="{label1}"/>
+			<mx:RemoveChild target="{lblLevel}"/>
+			<mx:RemoveChild target="{imgSpy}"/>
+			<mx:RemoveChild target="{lblScout}"/>
+			<mx:RemoveChild target="{imagBuy}"/>
+			<mx:RemoveChild target="{imgScout}"/>
+			<mx:RemoveChild target="{imgShare}"/>
+			<mx:RemoveChild target="{label3}"/>
+			<mx:RemoveChild target="{lblNoFriends}"/>
+			<mx:RemoveChild target="{lblSpy}"/>
+			<mx:RemoveChild target="{lblBuy}"/>
+			<mx:RemoveChild target="{lblShare}"/>
+			<mx:RemoveChild target="{btnClose}"/>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild" target="{btnClose}"/>
+			<mx:SetProperty target="{btnClose}" name="x" value="531"/>
+			<mx:SetProperty target="{btnClose}" name="y" value="434"/>
+			<mx:RemoveChild target="{canvas2}"/>
+			<mx:SetProperty target="{canvas1}" name="height" value="478"/>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Button x="482" y="434" label="Back" click="goBack()" id="btnBack"/>
+			</mx:AddChild>
+		</mx:State>
+		
+		<!-- spy state -->
+		
+		<mx:State name="spy" basedOn="clear">
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Label y="41" text="Select a friend  to spy on" fontSize="22" horizontalCenter="0" id="label4"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<ns1:FriendsList x="25" y="107" width="593" height="264" dataProvider="{_data.commonFriends}" columnCount="7" id="tileListFriends" />
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Image x="37" y="381" width="146" height="78" maintainAspectRatio="false" click="goToQuestionair()" buttonMode="true" id="imgLeftBot">
+					<mx:source>@Embed(source='com/artifact/resources/images/SpyBox.png')</mx:source>
+				</mx:Image>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:LinkButton alpha="0" x="97" y="405" label="Spy Now" fontSize="14" fontStyle="italic" id="label5" click="goToQuestionair()" fontWeight="normal"/>
+			</mx:AddChild>
+		</mx:State>
+		
+		<!-- question state -->
+		<mx:State name="questions" basedOn="spy">
+			<mx:SetProperty target="{label4}" name="text" value="Answer the following questions"/>
+			<mx:SetProperty target="{label5}" name="label" value="Done"/>
+			<mx:SetProperty target="{label5}" name="x" value="110"/>
+			<mx:SetProperty target="{label5}" name="y" value="407"/>
+			<mx:RemoveChild target="{tileListFriends}"/>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:VBox x="37" y="104" width="571" height="255"  id="vbxQuestions">
+					<mx:Repeater creationComplete="Alert.show(rptQuestions.dataProvider.length)" id="rptQuestions">
+						<ns1:Question width="100%" data="{rptQuestions.currentItem}"/>
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:AddChild>
+			<mx:SetEventHandler target="{label5}" name="click" handler="goToSpyReport()"/>
+			<mx:SetEventHandler target="{imgLeftBot}" name="click" handler="goToSpyReport()"/>
+		</mx:State>
+		
+		<!--report state-->
+		<mx:State name="report" basedOn="clear">
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Label x="164" y="98" text="Corrent  Answers are  :" fontSize="20" visible="{skillType == ArtifactConstants.SPY?true:false}"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Label x="67" y="156" text="Experience Successfully gained  :" fontSize="20"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Label x="415" y="101" text="{correctAnswers}" fontSize="20" visible="{skillType == ArtifactConstants.SPY?true:false}"/>
+			</mx:AddChild>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:Label x="415" y="156" text="{experienceGained} %" fontSize="20"/>
+			</mx:AddChild>
+		</mx:State>
+		<mx:State name="showfriends" basedOn="spy">
+			<mx:SetProperty target="{label4}" name="text" value="Select a friend  "/>
+			<mx:AddChild relativeTo="{canvas1}" position="lastChild">
+				<mx:HBox x="25" y="379" width="20%">
+					<mx:Canvas  width="146" height="78" visible="{skillType == ArtifactConstants.BUY?true:false}" includeInLayout="{skillType == ArtifactConstants.BUY?true:false}" click="goToBuyReport()">
+						<mx:Image width="100%" height="100%" id="imgBuyLeftBot" buttonMode="true">
+							<mx:source>@Embed(source='com/artifact/resources/images/buyBox.png')</mx:source>
+						</mx:Image>
+						<mx:LinkButton x="60" y="24" label="Buy Now" fontSize="14" fontStyle="italic" alpha="0" fontWeight="normal"/>
+					</mx:Canvas>
+					<mx:Canvas  width="146" height="78" visible="{skillType == ArtifactConstants.SHARE?true:false}" includeInLayout="{skillType == ArtifactConstants.SHARE?true:false}" buttonMode="true" click="goToShareReport()">
+						<mx:Image width="100%" height="100%" id="imgShareLeftBot" buttonMode="true">
+							<mx:source>@Embed(source='com/artifact/resources/images/ShareBox.png')</mx:source>
+						</mx:Image>
+						<mx:LinkButton x="49" y="23" label="Share Now" fontSize="14" fontStyle="italic" alpha="0" fontWeight="normal"/>
+					</mx:Canvas>
+				</mx:HBox>
+			</mx:AddChild>
+			<mx:RemoveChild target="{imgLeftBot}"/>
+			<mx:RemoveChild target="{label5}"/>
+		</mx:State>
+	</mx:states>
+	
+	
+	<!-- default state -->
+	<mx:Canvas x="47.5" y="82" width="642" height="324" styleName="loginApp" id="canvas1">
+		<mx:Label x="39" y="24" text="{_data.artifact.name}"   id="txiName" fontSize="24" maxWidth="456"  fontStyle="italic" fontWeight="bold" />
+		<mx:Label x="533" y="24" text="LVL" fontSize="24" fontStyle="italic" fontWeight="bold" id="label1"/>
+		<mx:Label x="594" y="24" text="{_data.artifactLvl}" fontSize="24" fontStyle="italic" fontWeight="bold" maxWidth="61" id="lblLevel" />
+		<ns1:CustomProgressBar x="364" y="67" width="258" height="36" percentComplete="{_data.progress}" id="customprogressbar1">
+		</ns1:CustomProgressBar>
+		<mx:TextArea x="39" y="122" width="254" height="188" alpha="0" fontSize="12" id="txaDesc" editable="false" text="{_data.artifact.desc}">
+		</mx:TextArea>
+		<mx:Image x="364" y="122" width="258" height="176"   source="com/artifact/resources/images/mapimage.png" maintainAspectRatio="false" id="image1">
+		</mx:Image>
+	</mx:Canvas>
+	<mx:Canvas x="47.5" y="414" width="642" height="148" styleName="loginApp" id="canvas2">
+		<mx:Image x="35" y="24" width="128" height="68" source="@Embed(source='com/artifact/resources/images/SpyBox.png')" click="goToSpy()" id="imgSpy" buttonMode="true" />
+		<mx:LinkButton alpha="0" x="95" y="41" label="Spy" fontSize="19" fontStyle="italic" fontWeight="normal" id="lblSpy" click="goToSpy()"/>
+		
+		<mx:Image x="183" y="24" width="131" height="68" source="@Embed(source='com/artifact/resources/images/ScoutBox.png')" click="goToScoutReport()" id="imgScout" buttonMode="true"/>
+		<mx:LinkButton alpha="0" x="237" y="41" label="Scout" fontSize="19" fontStyle="italic" id="lblScout" fontWeight="normal" click="goToScoutReport()"/>
+		
+		<mx:Image x="332" y="24" width="131" height="68" source="@Embed(source='com/artifact/resources/images/buyBox.png')" click="goToBuy()" id="imagBuy" buttonMode="true"/>
+		<mx:LinkButton alpha="0" x="400" y="41" label="Buy" fontSize="19" fontStyle="italic" id="lblBuy" fontWeight="normal" click="goToBuy()"/>
+		
+		<mx:Image x="484" y="24" width="131" height="68" source="@Embed(source='com/artifact/resources/images/ShareBox.png')" click="goToShare()" id="imgShare" buttonMode="true"/>
+		<mx:LinkButton alpha="0" x="540" y="41" label="Share" fontStyle="italic" fontSize="19" id="lblShare" fontWeight="normal" click="goToShare()"/>
+		
+		
+		<mx:Label x="35" y="100" text="{_data.numberOfCommonFriends}" width="20" height="19" fontSize="14" id="lblNoFriends"/>
+		<mx:Label alpha="0" x="50" y="100" text="friends also looking for this artifact" width="413"  fontSize="14" id="label3"/>
+		
+		<mx:Button y="104" label="CLOSE" click="closeMe()" id="btnClose" right="12"/>
+	</mx:Canvas>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.servermodel.GameProgress;
+			import com.artifact.servermodel.Answer;
+			import com.artifact.servermodel.UserProfile;
+			import com.artifact.servermodel.CurrentSearchParty;
+			import com.artifact.constants.ArtifactConstants;
+			import mx.collections.ArrayCollection;
+			import com.artifact.controller.MockController;
+			import mx.controls.Alert;
+			import com.artifact.model.SearchModel;
+			import mx.managers.PopUpManager;
+			
+			[Bindable]
+			public var skillType:String;
+			[Bindable]
+			private var _data:CurrentSearchParty;
+			
+			[Bindable]
+			public var experienceGained:int;
+			[Bindable]
+			public var correctAnswers:int;
+			public var gameProgress:GameProgress;
+				
+			override public function set data(value:Object):void{
+				this._data=value as CurrentSearchParty;
+			}
+			
+			
+			public function closeMe():void{
+				PopUpManager.removePopUp(this);
+			}
+			public function goToSpy():void{
+				skillType=ArtifactConstants.SPY
+				
+				currentState='spy'
+				
+			}
+			
+			public function goToScoutReport():void{
+				skillType=ArtifactConstants.SCOUT
+				var gameProgress:GameProgress=new GameProgress;
+				gameProgress.csp=_data;
+				gameProgress.friend = null;
+				Artifact.artifactUIController.grantScoutProgress(gameProgress);
+				//experienceGained=59;
+				//currentState='report'
+			}
+			
+			public function goToBuy():void{
+				skillType=ArtifactConstants.BUY
+				currentState='showfriends';
+			}
+			public function goToShare():void{
+				skillType=ArtifactConstants.SHARE
+				currentState='showfriends';
+			}
+			
+			public function goToQuestionair():void{
+				if(currentState == 'spy'){
+					if(tileListFriends.selectedItem){
+						var friend:UserProfile=tileListFriends.dataProvider[tileListFriends.selectedIndex] as UserProfile;
+						var currentSearchParty:CurrentSearchParty=_data;
+						var gameProgress:GameProgress=new GameProgress;
+						
+						gameProgress.csp=currentSearchParty;
+						gameProgress.friend=friend;
+						this.gameProgress=gameProgress;
+						Artifact.artifactUIController.getSpyQuestions(gameProgress);	
+					}
+					//currentState ='questions'
+				}
+			}
+			public function goToSpyReport():void{
+				var answerArray:Array=new Array();
+				for(var count:int = 0 ; count < vbxQuestions.getChildren().length ; count++){
+					var eachChild:Question=vbxQuestions.getChildren()[count] as Question;
+					var answer:Answer=new Answer();
+					answer.question=eachChild.question.text;
+					answer.answer=eachChild.radiogroup1.selection?eachChild.radiogroup1.selection.label:null;
+					answerArray.push(answer);	
+				}
+				Artifact.artifactUIController.grantSpyProgress(answerArray,gameProgress);
+			}
+			public function goToBuyReport():void{
+				//experienceGained=66;
+				//currentState='report';
+				if(tileListFriends.selectedItem){
+					var gameProgress:GameProgress=new GameProgress;
+					var friend:UserProfile=tileListFriends.dataProvider[tileListFriends.selectedIndex] as UserProfile;
+					gameProgress.csp=_data;
+					gameProgress.friend = friend;
+					
+					Artifact.artifactUIController.grantBuyProgress(gameProgress);
+				}
+			}
+			
+			public function goToShareReport():void{
+				if(tileListFriends.selectedItem){
+					var gameProgress:GameProgress=new GameProgress;
+					var friend:UserProfile=tileListFriends.dataProvider[tileListFriends.selectedIndex] as UserProfile;
+					gameProgress.csp=_data;
+					gameProgress.friend = friend;
+					
+					Artifact.artifactUIController.grantShareProgress(gameProgress);
+				}
+			}
+			
+			public function goBack():void{
+				if(currentState == 'spy'){
+					currentState='';
+				}else if(currentState == 'questions'){
+					currentState='spy';
+				}else if(currentState == 'report'){
+					currentState = '';
+				}else if(currentState == 'showfriends'){
+					currentState = '';
+				}
+			}
+		]]>
+	</mx:Script>
+	<mx:Image x="46.5" y="26" source="@Embed(source='com/artifact/resources/images/arrow.png')"/>
+	<mx:Label x="118" y="37" text="Searching" color="#293959" fontSize="27" fontFamily="Georgia" fontStyle="italic"/>
+	<mx:Button right="49" styleName="close" click="closeMe()" top="39"/>
+</mx:Canvas>

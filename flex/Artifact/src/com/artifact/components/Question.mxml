@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"   width="203">
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.servermodel.Questioniar;
+			import com.artifact.model.QuestionModel;
+			
+			[Bindable]
+			private var _data:Questioniar;
+			override public function set data(value:Object):void{
+				this._data=value as Questioniar;
+			}
+		]]>
+	</mx:Script>
+	<mx:Label x="87" y="10" text="{_data.question}" color="#FFFFFF" maxWidth="{this.width}" fontSize="14" id="question"/>
+	<mx:RadioButtonGroup id="radiogroup1"/>
+	<mx:RadioButton x="10" y="36" label="{_data.optionOne}" groupName="radiogroup1" color="#FFFFFF" maxWidth="{this.width}" fontSize="12"/>
+	<mx:RadioButton x="10" y="62" label="{_data.optionTwo}" groupName="radiogroup1" color="#FFFFFF" maxWidth="{this.width}" fontSize="12"/>
+	<mx:RadioButton x="10" y="88" label="{_data.optionThree}" groupName="radiogroup1" color="#FFFFFF" maxWidth="{this.width}" fontSize="12"/>
+	<mx:Label x="10" y="10" text="Question :" color="#FFFFFF" fontSize="14"/>
+	
+</mx:Canvas>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" >
+	<mx:ProgressBar x="7" y="4" width="{this.width-15}" trackHeight="{this.height-10}" height="{this.height-10}"   mode="manual" id="progressBar"  label="" maximum="100" minimum="0" />
+	<mx:Canvas backgroundImage="@Embed(source='../resources/images/ProgressBar.png')" backgroundSize="100%" width="100%"  height="100%" >
+	</mx:Canvas>
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var _percentComlete:Number;
+			public function set percentComplete(_percentComlete:Number):void{
+				this._percentComlete=_percentComlete;
+				callLater(function setProgressBar():void{
+					if(_percentComlete > 100){
+						progressBar.setProgress(100,100);
+						toolTip=100 +"%";
+					}else{
+						progressBar.setProgress(_percentComlete,100);
+						toolTip=_percentComlete.toString() +"%";
+					}
+				});
+			}
+			public function get percentComplete():Number{
+				return 	_percentComlete;
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" styleName="loginApp" xmlns:components="com.artifact.components.*">
+	<mx:HBox width="100%" height="100%" horizontalGap="{width*1/100}">
+	<mx:Spacer width="1%"/>
+	
+	<!--Left Panel-->
+		<mx:VBox id="vbxLeft" height="100%"  width="22%" paddingTop="10" paddingBottom="10" verticalGap="{vbxLeft.height*2/100}">
+			<mx:Canvas styleName="frame" height="32%" width="100%" id="cvsProfile" backgroundSize="100%">
+				<components:ProfileDetails width="100%" height="100%"/>
+			</mx:Canvas>
+			<mx:Panel height="67%" width="100%" id="cvsFriends" title="Friends" textAlign="center" >
+				<components:FriendsList width="100%" height="100%"  columnCount="4" dataProvider="{ArtifactUIController.friends}" id="lstMainFrds"/>
+			</mx:Panel>
+		</mx:VBox>
+		
+	<!--Middle Panel-->	
+		<mx:VBox id="vbxMiddle" height="100%"  width="45%" verticalGap="{vbxMiddle.height*2/100}" paddingTop="10" paddingBottom="10" verticalScrollPolicy="off">
+			<mx:Button width="100%" height="20%" styleName="startButton" label="Start New Artifact Search Party" fontSize="18" click="startNewParty()">
+			</mx:Button>
+			
+			<mx:Panel  width="100%" height="44%"  title="Current Search Parties">
+				<components:CurrentSearchParties width="100%" height="100%" />
+			</mx:Panel>
+			<mx:Panel  width="100%" height="30%" title="Friends Search Parties">
+				<components:FriendSearchParties width="100%" height="100%"/> 
+			</mx:Panel>
+		</mx:VBox>
+		
+		<!-- Right Panel -->
+		<mx:VBox id="vbsMyArtifacts" height="100%" width="30%" paddingTop="10" paddingBottom="10">
+			<mx:Panel  width="100%" height="99%" title="My Artifacts" textAlign="center">
+				<components:Artifacts width="100%" height="100%"/>
+			</mx:Panel>
+		</mx:VBox>
+	</mx:HBox>
+	<mx:Script>
+		<![CDATA[
+			import com.artifact.controller.ArtifactUIController;
+			import mx.core.Application;
+			import mx.managers.PopUpManager;
+			import com.artifact.controller.MockController;
+			
+			public var newSearchPartyPopUp:NewSearchParty;
+			public function startNewParty():void{
+				Artifact.artifactUIController.getAllArtifacts();
+				var popup:NewSearchParty=PopUpManager.createPopUp(Application.application as DisplayObject,NewSearchParty,true) as NewSearchParty;
+				this.newSearchPartyPopUp=popup;
+				PopUpManager.centerPopUp(popup);	
+			}
+		]]>
+	</mx:Script>
+	<mx:Script source="../includes/HomeInclude.as"/>
+</mx:Canvas>

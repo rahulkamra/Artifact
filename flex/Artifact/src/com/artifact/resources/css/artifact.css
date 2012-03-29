@@ -1,0 +1,108 @@
+/* CSS file */
+.loginApp{
+	border-skin: Embed(source="../images/border.png", scaleGridLeft=18, scaleGridRight=20, scaleGridTop=18,scaleGridBottom=20);
+}
+.loggedInApp{
+	backgroundImage: Embed(source="../images/bgmain.png");
+	
+}
+Button{
+	upSkin: Embed(source="../images/button.png");
+	overSkin: Embed(source="../images/button.png");
+	downSkin: Embed(source="../images/button.png");
+	disabledSkin: Embed(source="../images/button.png");
+	selectedUpSkin: Embed(source="../images/button.png");
+	selectedOverSkin: Embed(source="../images/button.png");
+	selectedDownSkin: Embed(source="../images/button.png");
+	selectedDisabledSkin: Embed(source="../images/button.png");
+	color: #FFFFFF;
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFFF;
+	
+}
+Panel {
+   borderAlpha: 1;
+   borderThicknessLeft: 0;
+   borderThicknessTop: 0;
+   borderThicknessBottom: 0;
+   borderThicknessRight: 0;
+   cornerRadius: 0;
+   headerHeight: 23;
+   backgroundAlpha: 1;
+   highlightAlphas: 0, 0;
+   headerColors: #3c2e26, #2d231c;
+   backgroundColor: #483d30;
+   titleStyleName: "mypanelTitle";
+}
+
+.mypanelTitle {
+   letterSpacing: 0;
+   color: #ffffff;
+   fontFamily: Verdana;
+   fontSize: 14;
+   fontWeight: bold;
+}
+.startButton{
+	border-skin: Embed(source="../images/button.png", scaleGridLeft=22, scaleGridRight=24, scaleGridTop=18,scaleGridBottom=20);
+	border-style:solid;
+	corner-radius:8;
+	upSkin: Embed(source="../images/but_normal.png");
+	overSkin: Embed(source="../images/but_over.png");
+	downSkin: Embed(source="../images/but_normal.png");
+	disabledSkin: Embed(source="../images/but_normal.png");
+	selectedUpSkin: Embed(source="../images/but_normal.png");
+	selectedOverSkin: Embed(source="../images/but_normal.png");
+	selectedDownSkin: Embed(source="../images/but_normal.png");
+	selectedDisabledSkin: Embed(source="../images/but_normal.png");
+	textRollOverColor: #FFFFFF;
+	textSelectedColor: #FFFFFF;
+}
+.frame{
+	backgroundImage: Embed(source="../images/frame.png");
+	
+}
+TileList{
+	backgroundColor: #483D30;
+	rollOverColor: #6A5946;
+	selectionColor: #2D2627;
+}
+Label{
+	color: #ffffff;
+	
+}
+
+List {
+   backgroundColor: #483d30;
+   useRollOver: true;
+   rollOverColor: #6a5946;
+   textRollOverColor: #ffffff;
+   borderColor: #b7babc;
+   selectionColor: #2d2627;
+}
+
+
+TextArea{
+	color: #FFFFFF;
+	
+}
+
+ProgressBar{
+	trackSkin: Embed(source="../images/transparent.png");
+}
+
+.search{
+	backgroundImage: Embed(source="../images/searchbg.png");
+}
+
+.close{
+	upSkin: Embed(source="../images/cross-normal.png");
+	overSkin: Embed(source="../images/cross.png");
+	downSkin: Embed(source="../images/cross.png");
+	disabledSkin: Embed(source="../images/cross.png");
+	selectedUpSkin: Embed(source="../images/cross.png");
+	selectedOverSkin: Embed(source="../images/cross.png");
+	selectedDownSkin: Embed(source="../images/cross.png");
+	selectedDisabledSkin: Embed(source="../images/cross.png");
+	
+}
+

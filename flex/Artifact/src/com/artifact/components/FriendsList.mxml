@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TileList xmlns:mx="http://www.adobe.com/2006/mxml"  itemRenderer="com.artifact.components.FriendListIR" itemDoubleClick="handleDoubleClick(event)" doubleClickEnabled="true">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import com.artifact.servermodel.UserProfile;
+			import mx.managers.PopUpManager;
+			import mx.events.ListEvent;
+			import mx.controls.Alert;
+			import com.artifact.controller.MockController;
+			
+			public function handleDoubleClick(event:ListEvent):void{
+				if(event.currentTarget.id == "lstMainFrds"){
+					var userProfile:UserProfile =event.itemRenderer.data as UserProfile;
+					var popUp:ShowProfile=PopUpManager.createPopUp(Application.application as DisplayObject,ShowProfile,true) as ShowProfile;
+					popUp.data=userProfile;
+					PopUpManager.centerPopUp(popUp);
+					
+				}
+			}
+						
+		]]>
+	</mx:Script>
+</mx:TileList>
